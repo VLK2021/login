@@ -1,11 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 
-
 const initialState = {
     users: [
-        {id:1, email: 'www@gmail.com', password: 'qweasd'}
-    ],
+        // {id:1, email: 'www@gmail.com', password: 'qweasd'}
+    ]
 }
 
 const userSlice = createSlice({
@@ -17,8 +16,8 @@ const userSlice = createSlice({
         addUser: ((state, action) => {
             state.users.push({
                 id: new Date().getTime(),
-                email: action.payload,
-                password: action.payload
+                email: action.payload.email,
+                password: action.payload.password
             })
         })
 
@@ -27,3 +26,4 @@ const userSlice = createSlice({
 
 const userReduser = userSlice.reducer;
 export default userReduser;
+export const {addUser} = userSlice.actions;

@@ -4,7 +4,8 @@ import userReduser from "./user.slise";
 
 const store = configureStore({
     reducer: {
-        user: userReduser,
+        user: userReduser
     }
+
 });
 export default store;
