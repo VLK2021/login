@@ -1,15 +1,20 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
-import Users from "../Users/Users";
+
+import hero from '../../images/Hero_image.png'
+import './LayoutStyle.css';
+
 
 
 const Layout = () => {
     return (
-        <div>
-            <Outlet/>
-            <Users/>
+        <div className={'layout'}>
+            <div className={'layout-img'}><img src={hero} alt="foto"/></div>
+
+            <div className={'layout-outlet'}><Outlet/></div>
         </div>
     );
+
 };
 
 export default Layout;

@@ -1,5 +1,6 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 import './FormLoginStyle.css'
 import {addUser} from "../../store/user.slise";
@@ -7,21 +8,28 @@ import {addUser} from "../../store/user.slise";
 
 const FormLogin = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const {users} = useSelector(state => state.user);
 
     const submit = (e) => {
         e.preventDefault();
-        dispatch(addUser({email:e.target.email.value, password:e.target.password.value}))
-        // console.log({email:e.target.email.value, password:e.target.password.value})
+
+        if (users.find(el => el.login === e.target.login.value)) {
+            navigate('/user');
+        } else {
+            navigate('/guest');
+        }
+
+        dispatch(addUser({login: e.target.login.value, password: e.target.password.value}));
         e.target.reset();
-
-
-    }
+    };
 
     return (
         <div>
             <form className={'form'} onSubmit={submit}>
-                <label>Email: </label>
-                <input type="text" name={'email'} placeholder={'enter_email'}/>
+                <label>Login: </label>
+                <input type="text" name={'login'} placeholder={'enter_login'}/>
 
                 <label>Password: </label>
                 <input type="text" name={'password'} placeholder={'enter_password'}/>
@@ -31,5 +39,4 @@ const FormLogin = () => {
         </div>
     );
 };
-
 export default FormLogin;
